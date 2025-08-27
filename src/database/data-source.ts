@@ -6,12 +6,12 @@ import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: env.db.host,
-  port: env.db.port,
-  username: env.db.username,
-  password: env.db.password,
-  database: env.db.name,
-  ssl: env.db.ssl ? { rejectUnauthorized: false } : false,
+  host: 'dpg-d2n66en5r7bs73f5nnog-a',
+  port: 5432,
+  username: 'vanessa_sql_user',
+  password: 'HywMnL4nthzGCyvBtiHohDGwN6L0Atqk',
+  database: 'vanessa_sql',
+  ssl: { rejectUnauthorized: false },
   synchronize: false, 
   logging: false,
   entities:
