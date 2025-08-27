@@ -1,9 +1,8 @@
-import 'reflect-metadata';
-import { DataSource } from 'typeorm';
 import { env } from '../config/env';
-import { Product } from '../entities/Product';
-import { Inventory } from '../entities/Inventory';
-import { StockMovement } from '../entities/StockMovement';
+import { Product } from "../entities/Product";
+import { Inventory } from "../entities/Inventory";
+import { StockMovement } from "../entities/StockMovement";
+import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -13,8 +12,14 @@ export const AppDataSource = new DataSource({
   password: env.db.password,
   database: env.db.name,
   ssl: env.db.ssl ? { rejectUnauthorized: false } : false,
-  synchronize: false, // ¡Nunca en prod! Usamos migraciones.
+  synchronize: false, 
   logging: false,
-  entities: [Product, Inventory, StockMovement],
-  migrations: ['dist/migrations/*.js'] // en prod correremos compiladas
+  entities:
+    process.env.NODE_ENV === 'production'
+      ? ['dist/entities/*.js'] // <-- aquí apuntamos a JS compilado
+      : [Product, Inventory, StockMovement], // <-- desarrollo
+  migrations:
+    process.env.NODE_ENV === 'production'
+      ? ['dist/migrations/*.js']
+      : ['src/migrations/*.ts'],
 });
