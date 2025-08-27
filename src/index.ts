@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./routers";
 import { errorHandler } from "./middleware/errorHandler";
+import 'reflect-metadata';
 
 const app = express();
 app.use(express.json());
