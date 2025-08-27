@@ -1,5 +1,6 @@
 import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min } from 'class-validator';
 
+
 export class CreateProductDto {
   @IsString() @IsNotEmpty() @Length(2, 120) name!: string;
   @IsString() @IsNotEmpty() @Length(2, 60) sku!: string;
