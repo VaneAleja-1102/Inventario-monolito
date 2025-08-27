@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", "express"]
+    "types": ["node"]
   }
 }
