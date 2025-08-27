@@ -1,25 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppDataSource = void 0;
-const env_1 = require("../config/env");
+const typeorm_1 = require("typeorm");
 const Product_1 = require("../entities/Product");
 const Inventory_1 = require("../entities/Inventory");
 const StockMovement_1 = require("../entities/StockMovement");
-const typeorm_1 = require("typeorm");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: 'postgres',
-    host: env_1.env.db.host,
-    port: env_1.env.db.port,
-    username: env_1.env.db.username,
-    password: env_1.env.db.password,
-    database: env_1.env.db.name,
-    ssl: env_1.env.db.ssl ? { rejectUnauthorized: false } : false,
+    host: 'dpg-d2n66en5r7bs73f5nnog-a',
+    port: 5432,
+    username: 'vanessa_sql_user',
+    password: 'HywMnL4nthzGCyvBtiHohDGwN6L0Atqk',
+    database: 'vanessa_sql',
+    ssl: { rejectUnauthorized: false },
     synchronize: false,
     logging: false,
     entities: process.env.NODE_ENV === 'production'
-        ? ['dist/entities/*.js'] // <-- aquí apuntamos a JS compilado
-        : [Product_1.Product, Inventory_1.Inventory, StockMovement_1.StockMovement], // <-- desarrollo
+        ? ['dist/entities/*.js'] // JS compilado en producción
+        : [Product_1.Product, Inventory_1.Inventory, StockMovement_1.StockMovement], // TS en desarrollo
     migrations: process.env.NODE_ENV === 'production'
-        ? ['dist/migrations/*.js']
-        : ['src/migrations/*.ts'],
+        ? ['dist/migrations/*.js'] // JS compilado en producción
+        : ['src/migrations/*.ts'], // TS en desarrollo
 });
